@@ -1,17 +1,17 @@
 /*
-	    Copyright 2014 Giovanni Di Gregorio.
+        Copyright 2014 Giovanni Di Gregorio.
 
-		Licensed under the Apache License, Version 2.0 (the "License");
-		you may not use this file except in compliance with the License.
-		You may obtain a copy of the License at
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
 
-		http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-		Unless required by applicable law or agreed to in writing, software
-		distributed under the License is distributed on an "AS IS" BASIS,
-		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		See the License for the specific language governing permissions and
-   		limitations under the License.   			
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.              
  */
 
 package com.wezka.nativecamera;
@@ -96,6 +96,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
         final Button captureButton = (Button) findViewById(getResources().getIdentifier("captureButton", "id", getPackageName()));
         final ImageView viewfinder = (ImageView) findViewById(getResources().getIdentifier("viewfinder", "id", getPackageName()));
         final RelativeLayout focusButton = (RelativeLayout) findViewById(getResources().getIdentifier("viewfinderArea", "id", getPackageName()));
+        final int imgCaptureButtonClick = getResources().getIdentifier("@drawable/btn_shot_click", null, getPackageName());
         final int imgFlashNo = getResources().getIdentifier("@drawable/btn_flash_no", null, getPackageName());
         final int imgFlashAuto = getResources().getIdentifier("@drawable/btn_flash_auto", null, getPackageName());
         final int imgFlashOn = getResources().getIdentifier("@drawable/btn_flash_on", null, getPackageName());
@@ -245,7 +246,11 @@ public class CameraActivity extends Activity implements SensorEventListener {
                         public void onAutoFocus(boolean success, Camera camera) {
                             // Catch take picture error
                             try {
+                                captureButton.setBackgroundResource(imgCaptureButtonClick);
+                                focusButton.setBackgroundColor(0x88000000);
                                 camera.takePicture(null, null, mPicture);
+                                //Toast.makeText(getApplicationContext(), 
+                                //    "Taking picture ...", Toast.LENGTH_SHORT).show();
                             } catch (RuntimeException ex) {
                                 // takePicture crash. Ignore.
                                 Toast.makeText(getApplicationContext(), 
@@ -558,7 +563,3 @@ public class CameraActivity extends Activity implements SensorEventListener {
     }
 
 }
-
-
-
-
